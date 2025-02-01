@@ -7,8 +7,11 @@ import { ElementList } from '@/Data/ElementList'
 import { useDragElementLayout } from '@/app/provider'
 
 
+
 function ElementsSideBar() {
     const {dragElementLayout, setDragElementLayout} = useDragElementLayout()
+
+
     const onDragStart = (layout:any) => {
         console.log(layout)
         setDragElementLayout({
@@ -20,13 +23,23 @@ function ElementsSideBar() {
             }
         })
     }
+
+    const onDragElementsStart = (element:any) => {
+        setDragElementLayout({
+            dragElement:{
+                ...element,
+            }
+        })
+
+
+    }
     return (
         <div className='p-5 h-screen'>
             <h2 className='text-xl font-bold pb-5'>Layout</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                 {Layout.map((layout, index) => (
                     <div key={index} draggable onDragStart={() => onDragStart(layout)}>
-
+        
                         <ElementLayoutCard key={index} layout={layout} index={index} />
                     </div>
 
@@ -37,11 +50,13 @@ function ElementsSideBar() {
             <h2 className='text-xl font-bold pb-5'>Elements</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                 {ElementList.map((element, index) => (
+                    <div key={index} draggable onDragStart={() => onDragElementsStart(element)}>
                     <ElementLayoutCard
                         key={index}
                         layout={element}
                         index={index}
                     />
+                    </div>
                 ))}
             </div>
 

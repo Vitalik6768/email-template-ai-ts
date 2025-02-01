@@ -6,6 +6,7 @@ import { useState } from 'react'
 // import ColumnLayout from '@/components/layoutElements/ColumnLayout'
 
 import React from 'react'
+import ColumnLayout from '../LayoutElements/ColumnLayout'
 
 
 function Canvas() {
@@ -18,7 +19,6 @@ function Canvas() {
   const onDragOver = (e:any) => {
     e.preventDefault();
     setDragOver(true)
-    console.log('over')
 
   }
 
@@ -28,13 +28,11 @@ function Canvas() {
     if (dragElementLayout?.dragLayout) {
       setEmailTemplate((prev: any) => Array.isArray(prev) ? [...prev, dragElementLayout.dragLayout] : [dragElementLayout.dragLayout])
     }
-    console.log('drop')
   }
 
   const getLayoutComponent = (layout:Layout) => {
-        console.log(layout)
     if (layout.type === 'column') {
-       return <span>{layout.numberOfColumns}</span>
+       return <ColumnLayout layout={layout} />
 
     }
   }
@@ -52,7 +50,7 @@ function Canvas() {
       >
         {emailTemplate?.length > 0 ? emailTemplate?.map((layout:any, index:any) => (
           <div key={index}>
-            <p className='text-black'>{getLayoutComponent(layout)}</p>
+            <span className='text-black'>{getLayoutComponent(layout)}</span>
           </div>
         )) : (
           <div className="text-gray-400 text-center py-8">
