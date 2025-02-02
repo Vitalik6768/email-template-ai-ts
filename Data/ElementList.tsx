@@ -49,7 +49,7 @@ export const ElementList = [
         icon: Image,
         type: 'Image',
         label: 'Image',
-        imageUrl: "/image.png",
+        imageUrl: "/image.jfif",
         alt: 'Image',
         url: '#',
         style: {
@@ -79,7 +79,7 @@ export const ElementList = [
             backgroundColor: '#ffffff',
             padding: '10px',
             height: '30%',
-            width: '30%',
+            width: '100%',
         },
         outerStyle: {
             display: 'flex',

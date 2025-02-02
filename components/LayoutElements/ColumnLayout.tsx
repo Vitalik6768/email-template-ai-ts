@@ -3,6 +3,11 @@
 import React, { useState } from 'react'
 import { Layout } from '@/types/ui-types/ui'
 import { useDragElementLayout, useEmailTemplate } from '@/app/provider'
+import ButtonComponent from '../custom/Element/ButtonComponent'
+import TextComponent from '../custom/Element/TextComponent'
+import ImageComponent from '../custom/Element/ImageComponent'
+import LogoComponent from '../custom/Element/LogoComponent'
+import DividerComponent from '../custom/Element/DividerComponent'
 
 
 function ColumnLayout({ layout }: { layout: any }) {
@@ -12,27 +17,38 @@ function ColumnLayout({ layout }: { layout: any }) {
     const { dragElementLayout, setDragElementLayout } = useDragElementLayout()
 
 
-    const getElementComponent = (element:any) => {
+    const getElementComponent = (element: any) => {
         if (!element) return null;
-        return element.type || null;
+        if (element?.type === 'Button') {
+            return <ButtonComponent {...element} />
+        }else if(element?.type === 'Text'){
+            return <TextComponent {...element} />
+        }else if(element?.type === 'Image'){
+            return <ImageComponent {...element} />
+        }else if(element?.type === 'Logo'){
+            return <LogoComponent {...element} />
+        }else if(element?.type === 'Divider'){
+            return <DividerComponent {...element} />
+        }
+        // return <div>{element?.type}</div>|| null;
     }
 
 
 
-    const onDragOverHandle = (event: React.DragEvent<HTMLDivElement>, index:number) => { 
+    const onDragOverHandle = (event: React.DragEvent<HTMLDivElement>, index: number) => {
         event.preventDefault()
         // console.log(layout?.id)
         setDragOver({
-            index:index,
-            columnId:layout?.id
+            index: index,
+            columnId: layout?.id
         })
 
     }
 
     const onDropHandle = () => {
         const index = dragOver?.index
-        setEmailTemplate((prev: any[]) => 
-            prev?.map((col:any)=>col.id === layout.id?{...col,[index]:dragElementLayout?.dragElement}:col)
+        setEmailTemplate((prev: any[]) =>
+            prev?.map((col: any) => col.id === layout.id ? { ...col, [index]: dragElementLayout?.dragElement } : col)
 
         )
         setDragOver(null)
@@ -44,18 +60,21 @@ function ColumnLayout({ layout }: { layout: any }) {
     return (
         <div>
             <div
-            style={{
-                display:'grid',
-                gridTemplateColumns:`repeat(${layout?.numberOfColumns},1fr)`,
-                gap:0
-            }}
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${layout?.numberOfColumns},1fr)`,
+                    gap: 0
+                }}
             >
                 {Array.from({ length: layout?.numberOfColumns }).map((_, index) => (
-                    <div 
-                        key={index} 
-                        className={`p-2 flex items-center border border-dashed justify-center ${
-                            index === dragOver?.index && dragOver?.columnId === layout.id ? 'bg-blue-100' : 'bg-gray-100'
-                        }`}
+                    <div
+                        key={index}
+                        className={`p-2 flex items-center border border-dashed justify-center 
+                        ${layout?.[index]?.type && 'bg-white border-none'}
+
+
+                            ${index === dragOver?.index && dragOver?.columnId === layout.id ? 'bg-blue-100' : 'bg-gray-100'
+                            }`}
                         onDragOver={(event) => onDragOverHandle(event, index)}
                         onDrop={onDropHandle}
                     >
