@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Layout } from '@/types/ui-types/ui'
-import { useDragElementLayout, useEmailTemplate } from '@/app/provider'
+import { useDragElementLayout, useEmailTemplate, useSelectedElement } from '@/app/provider'
 import ButtonComponent from '../custom/Element/ButtonComponent'
 import TextComponent from '../custom/Element/TextComponent'
 import ImageComponent from '../custom/Element/ImageComponent'
@@ -15,19 +15,20 @@ function ColumnLayout({ layout }: { layout: any }) {
     const [dragOver, setDragOver] = useState<any>()
     const { emailTemplate, setEmailTemplate } = useEmailTemplate()
     const { dragElementLayout, setDragElementLayout } = useDragElementLayout()
+    const { selectedElement, setSelectedElement } = useSelectedElement()
 
 
     const getElementComponent = (element: any) => {
         if (!element) return null;
         if (element?.type === 'Button') {
             return <ButtonComponent {...element} />
-        }else if(element?.type === 'Text'){
+        } else if (element?.type === 'Text') {
             return <TextComponent {...element} />
-        }else if(element?.type === 'Image'){
+        } else if (element?.type === 'Image') {
             return <ImageComponent {...element} />
-        }else if(element?.type === 'Logo'){
+        } else if (element?.type === 'Logo') {
             return <LogoComponent {...element} />
-        }else if(element?.type === 'Divider'){
+        } else if (element?.type === 'Divider') {
             return <DividerComponent {...element} />
         }
         // return <div>{element?.type}</div>|| null;
@@ -69,14 +70,18 @@ function ColumnLayout({ layout }: { layout: any }) {
                 {Array.from({ length: layout?.numberOfColumns }).map((_, index) => (
                     <div
                         key={index}
-                        className={`p-2 flex items-center border border-dashed justify-center 
-                        ${layout?.[index]?.type && 'bg-white border-none'}
-
-
+                        className={`p-2 flex items-center border border-dashed justify-center cursor-pointer 
+                        ${layout?.[index]?.type && 'bg-white'}
                             ${index === dragOver?.index && dragOver?.columnId === layout.id ? 'bg-blue-100' : 'bg-gray-100'
-                            }`}
+                            }
+
+                            ${(selectedElement?.layout?.id == layout?.id && selectedElement?.index == index) ? 'border-blue-500 border' : ''}
+                            
+                            `}
+                            
                         onDragOver={(event) => onDragOverHandle(event, index)}
                         onDrop={onDropHandle}
+                        onClick={() => setSelectedElement({ layout: layout, index: index })}
                     >
                         {getElementComponent(layout?.[index]) ?? index + 1}
 

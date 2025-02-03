@@ -3,6 +3,7 @@
 import { DragDropElementLayout } from '@/context/DragDropElementLayout';
 import { EmailTemplateContext } from '@/context/EmailTemplateContext';
 import { ScreenSizeContext } from '@/context/ScreenSizeContext.';
+import { SelectedElementContext } from '@/context/SelectedElementContext';
 import React, { useContext } from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -13,6 +14,7 @@ function Provider({ children }: { children: React.ReactNode }) {
     const [screenSize, setScreenSize] = useState<string>('desktop');
     const [dragElementLayout, setDragElementLayout] = useState<any>(null);
     const [emailTemplate, setEmailTemplate] = useState<any>(null);
+    const [selectedElement, setSelectedElement] = useState<any>(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -30,7 +32,9 @@ function Provider({ children }: { children: React.ReactNode }) {
             <ScreenSizeContext.Provider value={{ screenSize, setScreenSize }}>
                 <DragDropElementLayout.Provider value={{ dragElementLayout, setDragElementLayout }}>
                     <EmailTemplateContext.Provider value={{ emailTemplate, setEmailTemplate }}>
-                        {children}
+                        <SelectedElementContext.Provider value={{ selectedElement, setSelectedElement }}>
+                            {children}
+                        </SelectedElementContext.Provider>
                     </EmailTemplateContext.Provider>
                 </DragDropElementLayout.Provider>
              </ScreenSizeContext.Provider>
@@ -50,4 +54,8 @@ export const useDragElementLayout = () => {
 
 export const useEmailTemplate = () => {
   return useContext(EmailTemplateContext);
+}
+
+export const useSelectedElement = () => {
+  return useContext(SelectedElementContext);
 }
