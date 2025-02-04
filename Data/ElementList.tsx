@@ -35,7 +35,7 @@ export const ElementList = [
             backgroundColor: '#fff',
             color: '#000000',
             padding: '10px',
-            textAlign: 'center',
+            textAlign: 'left',
             fontSize: '22px',
             fontWeight: 'normal',
             textTransform: 'uppercase'//lowercase , capitilized

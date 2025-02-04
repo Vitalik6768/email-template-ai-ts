@@ -8,6 +8,7 @@ import TextComponent from '../custom/Element/TextComponent'
 import ImageComponent from '../custom/Element/ImageComponent'
 import LogoComponent from '../custom/Element/LogoComponent'
 import DividerComponent from '../custom/Element/DividerComponent'
+import { Trash2Icon } from 'lucide-react'
 
 
 function ColumnLayout({ layout }: { layout: any }) {
@@ -53,19 +54,24 @@ function ColumnLayout({ layout }: { layout: any }) {
 
         )
         setDragOver(null)
+    }
 
-
+    const DeleteLayout = (id: string) => {
+        const updatedEmailTemplate = emailTemplate?.filter((col: any) => col.id !== id)
+        setEmailTemplate(updatedEmailTemplate)
+        setSelectedElement(null)
 
     }
 
     return (
-        <div>
+        <div className='relative'>
             <div
                 style={{
                     display: 'grid',
                     gridTemplateColumns: `repeat(${layout?.numberOfColumns},1fr)`,
                     gap: 0
                 }}
+                className={`${(selectedElement?.layout?.id == layout?.id && 'border border-dashed-4 border-blue-500')} `}
             >
                 {Array.from({ length: layout?.numberOfColumns }).map((_, index) => (
                     <div
@@ -87,6 +93,12 @@ function ColumnLayout({ layout }: { layout: any }) {
 
                     </div>
                 ))}
+  
+                <div className='absolute -right-14 bg-gray-100'>
+                    {selectedElement?.layout?.id == layout?.id &&
+                        <Trash2Icon onClick={() => DeleteLayout(layout?.id)} className='text-gray-500 cursor-pointer hover:text-red-500' />
+                    }
+                </div>
             </div>
         </div>
     )
