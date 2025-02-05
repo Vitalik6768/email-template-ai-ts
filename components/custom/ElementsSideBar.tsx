@@ -5,12 +5,20 @@ import { Layout } from '@/Data/Layout'
 import ElementLayoutCard from '@/components/custom/ElementLayoutCard'
 import { ElementList } from '@/Data/ElementList'
 import { useDragElementLayout } from '@/app/provider'
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+  } from "@/components/ui/tabs"
 
 
 
 function ElementsSideBar() {
     const {dragElementLayout, setDragElementLayout} = useDragElementLayout()
 
+
+    
 
     const onDragStart = (layout:any) => {
         console.log(layout)
@@ -35,31 +43,36 @@ function ElementsSideBar() {
     }
     return (
         <div className='p-5 h-screen'>
-            <h2 className='text-xl font-bold pb-5'>Layout</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                {Layout.map((layout, index) => (
-                    <div key={index} draggable onDragStart={() => onDragStart(layout)}>
-        
-                        <ElementLayoutCard key={index} layout={layout} index={index} />
+            <Tabs defaultValue="layout" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="layout">Layout</TabsTrigger>
+                    <TabsTrigger value="elements">Elements</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="layout">
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                        {Layout.map((layout, index) => (
+                            <div key={index} draggable onDragStart={() => onDragStart(layout)}>
+                                <ElementLayoutCard key={index} layout={layout} index={index} />
+                            </div>
+                        ))}
                     </div>
+                </TabsContent>
 
-                ))}
-            </div>
-
-
-            <h2 className='text-xl font-bold pb-5'>Elements</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                {ElementList.map((element, index) => (
-                    <div key={index} draggable onDragStart={() => onDragElementsStart(element)}>
-                    <ElementLayoutCard
-                        key={index}
-                        layout={element}
-                        index={index}
-                    />
+                <TabsContent value="elements">
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                        {ElementList.map((element, index) => (
+                            <div key={index} draggable onDragStart={() => onDragElementsStart(element)}>
+                                <ElementLayoutCard
+                                    key={index}
+                                    layout={element}
+                                    index={index}
+                                />
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-
+                </TabsContent>
+            </Tabs>
         </div>
     )
 }
