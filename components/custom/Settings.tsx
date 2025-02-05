@@ -10,6 +10,7 @@ import InputUrlField from './Settings/InputUrlField'
 import SliderField from './Settings/SliderField'
 import TextAreaField from './Settings/TextAreaField'
 import ToggleGroupField from './Settings/ToggleGroupField'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
 function Settings() {
 
@@ -69,57 +70,80 @@ function Settings() {
 
     return (
         <div className='p-5 min-h-screen'>
-            <h2 className='font-bold text-2xl'>Settings</h2>
-            {(element?.content !== undefined) && (
-                <InputField
-                    label={'Content'}
-                    value={element?.content || ''}
-                    onHandleInputChange={(value: any) =>
-                        onHandleInputChange('content', value)
+
+            <Tabs defaultValue="layout" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="content">Content</TabsTrigger>
+                    <TabsTrigger value="style">Style</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="content">
+
+                    {element?.style?.textAlign &&
+                        <ToggleGroupField label={'Text Align'} value={element?.style?.textAlign} onHandleStyleChange={(value: any) => onHandleStyleChange('textAlign', value)} options={textAlignOptions} />
                     }
-                />
-            )}
 
-            {element?.textarea &&
-                <TextAreaField label={'Textarea'} value={element?.textarea} onHandleInputChange={(value: any) => onHandleInputChange('textarea', value)} />
+                    {(element?.content !== undefined) && (
+                        <InputField
+                            label={'Content'}
+                            value={element?.content || ''}
+                            onHandleInputChange={(value: any) =>
+                                onHandleInputChange('content', value)
+                            }
+                        />
+                    )}
 
-            }
+                    {element?.textarea &&
+                        <TextAreaField label={'Textarea'} value={element?.textarea} onHandleInputChange={(value: any) => onHandleInputChange('textarea', value)} />
 
-            {element?.content &&
-                <InputUrlField label={'Url'} value={element?.url} onHandleInputChange={(value: any) => onHandleInputChange('url', value)} />
-
-            }
-
-            {element?.style?.backgroundColor &&
-                <ColorPickerField label='Background Color' value={element?.style?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value)} />
-            }
-
-            {element?.style?.fontSize &&
-                <InputStylefield label={'Font Size'} value={element?.style?.fontSize} onHandleStyleChange={(value: any) => onHandleStyleChange('fontSize', value)} />
-            }
-
-            {element?.style?.padding &&
-                <InputStylefield label={'Padding'} value={element?.style?.padding} onHandleStyleChange={(value: any) => onHandleStyleChange('padding', value)} />
-            }
+                    }
 
 
-            {element?.style?.borderRadius &&
-                <SliderField label={'Border Radius'} type='px' value={element?.style?.borderRadius} onHandleStyleChange={(value: any) => onHandleStyleChange('borderRadius', value)} />
-            }
+                    {element?.content &&
+                        <InputUrlField label={'Url'} value={element?.url} onHandleInputChange={(value: any) => onHandleInputChange('url', value)} />
 
-            {element?.style?.width &&
-                <SliderField label={'Width'} type='%' value={element?.style?.width} onHandleStyleChange={(value: any) => onHandleStyleChange('width', value)} />
-            }
-
-            {element?.style?.textAlign &&
-                <ToggleGroupField label={'Text Align'} value={element?.style?.textAlign} onHandleStyleChange={(value: any) => onHandleStyleChange('textAlign', value)} options={textAlignOptions} />
-            }
+                    }
 
 
 
+                </TabsContent>
+
+                <TabsContent value="style">
+
+                    {element?.style?.backgroundColor &&
+                        <ColorPickerField label='Background Color' value={element?.style?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value)} />
+                    }
+
+                    {element?.style?.fontSize &&
+                        <InputStylefield label={'Font Size'} value={element?.style?.fontSize} onHandleStyleChange={(value: any) => onHandleStyleChange('fontSize', value)} />
+                    }
+
+                    {element?.style?.padding &&
+                        <InputStylefield label={'Padding'} value={element?.style?.padding} onHandleStyleChange={(value: any) => onHandleStyleChange('padding', value)} />
+                    }
+
+
+                    {element?.style?.borderRadius &&
+                        <SliderField label={'Border Radius'} type='px' value={element?.style?.borderRadius} onHandleStyleChange={(value: any) => onHandleStyleChange('borderRadius', value)} />
+                    }
+
+                    {element?.style?.width &&
+                        <SliderField label={'Width'} type='%' value={element?.style?.width} onHandleStyleChange={(value: any) => onHandleStyleChange('width', value)} />
+                    }
 
 
 
+                </TabsContent>
+
+
+
+
+                {/* <h2 className='font-bold text-2xl'>Settings</h2> */}
+
+
+
+
+            </Tabs>
         </div>
     )
 }
