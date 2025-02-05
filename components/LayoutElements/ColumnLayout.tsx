@@ -81,7 +81,12 @@ function ColumnLayout({ layout }: { layout: any }) {
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Backspace' && selectedElement?.layout?.id === layout.id) {
+            // Check if the active element is an input, textarea, or contenteditable element
+            const isInputActive = document.activeElement instanceof HTMLInputElement || 
+                                document.activeElement instanceof HTMLTextAreaElement ||
+                                document.activeElement?.hasAttribute('contenteditable');
+            
+            if (event.key === 'Backspace' && !isInputActive && selectedElement?.layout?.id === layout.id) {
                 deleteElement(layout?.[selectedElement.index], selectedElement.index);
             }
         };
