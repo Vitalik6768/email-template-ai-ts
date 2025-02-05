@@ -71,7 +71,7 @@ export const ElementList = [
         label: 'Text',
         textarea: 'Sample Text',
         style: {
-            backgroundColor: '#fff',
+            backgroundColor: '#7a3e3e',
             color: '#000000',
             padding: '10px',
             textAlign: 'left',
@@ -80,7 +80,7 @@ export const ElementList = [
             textTransform: 'uppercase'//lowercase , capitilized
         },
         outerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: '#7a3e3e',
             width: '100%'
         }
     },

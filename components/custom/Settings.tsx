@@ -114,6 +114,10 @@ function Settings() {
                         <ColorPickerField label='Background Color' value={element?.style?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value)} />
                     }
 
+                    {element?.outerStyle?.backgroundColor &&
+                        <ColorPickerField label='Container Color' value={element?.outerStyle?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value)} />
+                    }
+
                     {element?.style?.fontSize &&
                         <InputStylefield label={'Font Size'} value={element?.style?.fontSize} onHandleStyleChange={(value: any) => onHandleStyleChange('fontSize', value)} />
                     }

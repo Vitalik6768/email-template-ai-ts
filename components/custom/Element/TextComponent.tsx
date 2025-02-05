@@ -3,8 +3,8 @@ import React from 'react'
 function TextComponent({style, textarea}:any) {
   return (
     <div className='w-full'>
-      {/* <p style={style}>{content}</p> */}
-      {textarea}
+      <span style={style}>{textarea}</span>
+      {/* {textarea} */}
     </div>
   )
 }
