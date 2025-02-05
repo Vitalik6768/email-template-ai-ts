@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Layout } from '@/types/ui-types/ui'
 import { useDragElementLayout, useEmailTemplate, useSelectedElement } from '@/app/provider'
 import ButtonComponent from '../custom/Element/ButtonComponent'
@@ -62,6 +62,42 @@ function ColumnLayout({ layout }: { layout: any }) {
         setSelectedElement(null)
 
     }
+
+
+        const deleteElement = (element: any, index: number) => {
+        setEmailTemplate((prev: any[]) =>
+            prev.map((col: any) => {
+                if (col.id === layout.id) {
+                    const updatedCol = { ...col };
+                    // Delete the element at the specific index
+                    delete updatedCol[index];
+                    return updatedCol;
+                }
+                return col;
+            })
+        );
+        setSelectedElement(null);
+    }
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Backspace' && selectedElement?.layout?.id === layout.id) {
+                deleteElement(layout?.[selectedElement.index], selectedElement.index);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [selectedElement, layout]);
+
+
+
+
+
+
+    
 
     return (
         <div className='relative'>
