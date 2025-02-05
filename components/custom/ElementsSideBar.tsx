@@ -42,7 +42,7 @@ function ElementsSideBar() {
 
     }
     return (
-        <div className='p-5 h-screen'>
+        <div className='p-5 min-h-screen'>
             <Tabs defaultValue="layout" className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="layout">Layout</TabsTrigger>

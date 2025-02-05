@@ -18,7 +18,7 @@ function SliderField({label, value, onHandleStyleChange, type }:SliderFieldProps
     }
 
   return (
-    <div>
+    <div className='mt-3'>
         <label>{label} ({value})</label>
         <Slider defaultValue={[formatedValue(value)]} max={100} step={1}
         

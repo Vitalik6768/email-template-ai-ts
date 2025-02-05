@@ -29,7 +29,7 @@ function ViewHtmlDialog({ openDialog, htmlCode, closeDialog }: ViewHtmlDialogPro
         <Dialog open={openDialog} onOpenChange={closeDialog}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle asChild>
+                    <DialogTitle>
                         <div>
                             <h2>Html Code Template</h2>
                         </div>

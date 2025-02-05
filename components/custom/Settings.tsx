@@ -68,8 +68,7 @@ function Settings() {
     }
 
     return (
-        <div className='p-5'>
-
+        <div className='p-5 min-h-screen'>
             <h2 className='font-bold text-2xl'>Settings</h2>
             {(element?.content !== undefined) && (
                 <InputField
@@ -103,8 +102,9 @@ function Settings() {
                 <InputStylefield label={'Padding'} value={element?.style?.padding} onHandleStyleChange={(value: any) => onHandleStyleChange('padding', value)} />
             }
 
+
             {element?.style?.borderRadius &&
-                <SliderField label={'Border Radius'} value={element?.style?.borderRadius} onHandleStyleChange={(value: any) => onHandleStyleChange('borderRadius', value)} />
+                <SliderField label={'Border Radius'} type='px' value={element?.style?.borderRadius} onHandleStyleChange={(value: any) => onHandleStyleChange('borderRadius', value)} />
             }
 
             {element?.style?.width &&
