@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Code, Monitor, Smartphone } from 'lucide-react'
 import { useScreenSize } from '@/app/provider'
+import { UserButton } from '@clerk/nextjs'
 
 interface EditorHeaderProps {
     viewHtmlCode: (arg0: boolean) => void
@@ -41,7 +42,7 @@ function EditorHeader({ viewHtmlCode }: any) {
 
 
 
-            <div className='flex gap-3'>
+            <div className='flex gap-3 items-center'>
 
                 <Button variant={'ghost'} onClick={() => viewHtmlCode(true)}>
                     <Code className='hover:text-primary' />
@@ -50,6 +51,7 @@ function EditorHeader({ viewHtmlCode }: any) {
 
                 <Button variant={'outline'}>Send Test Email</Button>
                 <Button>Save Template</Button>
+                <UserButton afterSignOutUrl='/' />
 
 
             </div>

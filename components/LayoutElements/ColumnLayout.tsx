@@ -100,45 +100,6 @@ function ColumnLayout({ layout }: { layout: any }) {
 
 
 
-    // return (
-    //     <div className='relative'>
-    //         <table
-    //             style={{
-    //                 width: '100%',
-    //                 borderCollapse: 'collapse'
-    //             }}
-    //             className={`${(selectedElement?.layout?.id == layout?.id && 'border border-dashed-4 border-blue-500')} `}
-    //         >
-    //             <tbody>
-    //                 <tr>
-    //                     {Array.from({ length: layout?.numberOfColumns }).map((_, index) => (
-    //                         <td
-    //                             key={index}
-    //                             className={`p-2 text-center border border-dashed cursor-pointer 
-    //                             ${layout?.[index]?.type && 'bg-white'}
-    //                             ${index === dragOver?.index && dragOver?.columnId === layout.id ? 'bg-blue-100' : 'bg-gray-100'}
-    //                             ${(selectedElement?.layout?.id == layout?.id && selectedElement?.index == index) ? 'border-blue-500 border' : ''}
-    //                             `}
-    //                             onDragOver={(event) => onDragOverHandle(event, index)}
-    //                             onDrop={onDropHandle}
-    //                             onClick={() => setSelectedElement({ layout: layout, index: index })}
-    //                         >
-    //                             {getElementComponent(layout?.[index]) ?? index + 1}
-    //                         </td>
-    //                     ))}
-    //                 </tr>
-    //             </tbody>
-    //         </table>
-
-    //         <div className='absolute -right-14 bg-gray-100'>
-    //             {selectedElement?.layout?.id == layout?.id &&
-    //                 <Trash2Icon onClick={() => DeleteLayout(layout?.id)} className='text-gray-500 cursor-pointer hover:text-red-500' />
-    //             }
-    //         </div>
-    //     </div>
-    // )
-
-    
 
     return (
         <div className='relative'>
