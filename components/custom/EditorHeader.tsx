@@ -4,8 +4,12 @@ import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Code, Monitor, Smartphone } from 'lucide-react'
-import { useScreenSize } from '@/app/provider'
+import { useEmailTemplate, useScreenSize } from '@/app/provider'
 import { UserButton } from '@clerk/nextjs'
+import { updateEmailTemplate } from '@/convex/emailTemplate'
+import { useMutation } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { useParams } from 'next/navigation'
 
 interface EditorHeaderProps {
     viewHtmlCode: (arg0: boolean) => void
@@ -13,6 +17,18 @@ interface EditorHeaderProps {
 
 function EditorHeader({ viewHtmlCode }: any) {
     const { screenSize, setScreenSize } = useScreenSize();
+    const updateEmailTemplate = useMutation(api.emailTemplate.updateEmailTemplate);
+    const {templateId} = useParams();
+    const {emailTemplate, setEmailTemplate} = useEmailTemplate();
+
+    const onSaveTemplate = async()=>{
+        await updateEmailTemplate({
+            tid:templateId as string,
+            design:emailTemplate
+
+        })
+
+    }
 
  
 
@@ -50,7 +66,7 @@ function EditorHeader({ viewHtmlCode }: any) {
                 </Button>
 
                 <Button variant={'outline'}>Send Test Email</Button>
-                <Button>Save Template</Button>
+                <Button onClick={onSaveTemplate}>Save Template</Button>
                 <UserButton afterSignOutUrl='/' />
 
 

@@ -32,12 +32,16 @@ function ColumnLayout({ layout }: { layout: any }) {
         } else if (element?.type === 'Divider') {
             return <DividerComponent {...element} />
         }
+
+        console.log(emailTemplate)
         // return <div>{element?.type}</div>|| null;
     }
 
 
 
     const onDragOverHandle = (event: React.DragEvent<HTMLDivElement>, index: number) => {
+        console.log(emailTemplate)
+
         event.preventDefault()
         // console.log(layout?.id)
         setDragOver({
