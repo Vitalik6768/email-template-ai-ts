@@ -40,7 +40,7 @@ function ColumnLayout({ layout }: { layout: any }) {
 
 
     const onDragOverHandle = (event: React.DragEvent<HTMLDivElement>, index: number) => {
-        console.log(emailTemplate)
+        // console.log(emailTemplate)
 
         event.preventDefault()
         // console.log(layout?.id)
@@ -119,11 +119,13 @@ function ColumnLayout({ layout }: { layout: any }) {
                         {Array.from({ length: layout?.numberOfColumns }).map((_, index) => (
                             <td
                                 key={index}
-                                className={`p-2 text-center border border-dashed cursor-pointer 
+                                className={` border border-dashed cursor-pointer
+                                 
                                 ${layout?.[index]?.type && 'bg-white'}
                                 ${index === dragOver?.index && dragOver?.columnId === layout.id ? 'bg-blue-100' : 'bg-gray-100'}
                                 ${(selectedElement?.layout?.id == layout?.id && selectedElement?.index == index) ? 'border-blue-500 border' : ''}
                                 `}
+                                   
                                 onDragOver={(event) => onDragOverHandle(event, index)}
                                 onDrop={onDropHandle}
                                 onClick={() => setSelectedElement({ layout: layout, index: index })}

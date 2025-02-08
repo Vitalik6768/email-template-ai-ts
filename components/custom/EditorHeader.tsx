@@ -12,10 +12,10 @@ import { api } from '@/convex/_generated/api'
 import { useParams } from 'next/navigation'
 
 interface EditorHeaderProps {
-    viewHtmlCode: (arg0: boolean) => void
+    viewHtmlCode: (value: boolean) => void
 }
 
-function EditorHeader({ viewHtmlCode }: any) {
+function EditorHeader({ viewHtmlCode }: EditorHeaderProps) {
     const { screenSize, setScreenSize } = useScreenSize();
     const updateEmailTemplate = useMutation(api.emailTemplate.updateEmailTemplate);
     const {templateId} = useParams();

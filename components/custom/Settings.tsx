@@ -31,6 +31,7 @@ function Settings() {
 
     useEffect(() => {
         setElement(selectedElement?.layout?.[selectedElement?.index])
+
     }, [selectedElement])
 
     const onHandleInputChange = (fieldName: any, value: any) => {
@@ -40,11 +41,13 @@ function Settings() {
 
         const updateSelectedElement = { ...selectedElement }
 
-        console.log('updateSelectedElement', updateSelectedElement)
+        // console.log('updateSelectedElement', updateSelectedElement)
 
         updateSelectedElement.layout[selectedElement?.index][fieldName] = value
 
-        console.log('updateSelectedElement to set', updateSelectedElement)
+        // console.log('updateSelectedElement to set', updateSelectedElement)
+
+        console.log('selectedElement style', selectedElement?.outerStyle?.backgroundColor)
 
 
         setSelectedElement(updateSelectedElement)
@@ -53,20 +56,30 @@ function Settings() {
 
 
 
-    const onHandleStyleChange = (fieldName: any, value: any) => {
+    const onHandleStyleChange = (fieldName: any, value: any, style: string) => {
         const updateSelectedElement = { ...selectedElement }
 
         console.log('value fron', value)
 
-        updateSelectedElement.layout[selectedElement?.index].style = {
-            ...updateSelectedElement.layout[selectedElement?.index].style,
-            [fieldName]: value
+        if (style === 'outerStyle') {
+            updateSelectedElement.layout[selectedElement?.index].outerStyle = {
+                ...updateSelectedElement.layout[selectedElement?.index].outerStyle,
+                [fieldName]: value
+            }
+        } else {
+            updateSelectedElement.layout[selectedElement?.index].style = {
+                ...updateSelectedElement.layout[selectedElement?.index].style,
+                [fieldName]: value
+            }
         }
 
-        console.log('updateSelectedElement', updateSelectedElement)
+
+
+        console.log('updateSelectedElement', updateSelectedElement,)
 
         setSelectedElement(updateSelectedElement)
     }
+
 
     return (
         <div className='p-5 min-h-screen'>
@@ -80,7 +93,7 @@ function Settings() {
                 <TabsContent value="content">
 
                     {element?.style?.textAlign &&
-                        <ToggleGroupField label={'Text Align'} value={element?.style?.textAlign} onHandleStyleChange={(value: any) => onHandleStyleChange('textAlign', value)} options={textAlignOptions} />
+                        <ToggleGroupField label={'Text Align'} value={element?.style?.textAlign} onHandleStyleChange={(value: any) => onHandleStyleChange('textAlign', value, 'style')} options={textAlignOptions} />
                     }
 
                     {(element?.content !== undefined) && (
@@ -110,29 +123,43 @@ function Settings() {
 
                 <TabsContent value="style">
 
+
+
+
                     {element?.style?.backgroundColor &&
-                        <ColorPickerField label='Background Color' value={element?.style?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value)} />
+                        <ColorPickerField label='Background Color' value={element?.style?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value, 'style')} />
                     }
 
                     {element?.outerStyle?.backgroundColor &&
-                        <ColorPickerField label='Container Color' value={element?.outerStyle?.backgroundColor} onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value)} />
+
+                        < ColorPickerField
+                            label={element?.outerStyle?.backgroundColor}
+                            value={element?.outerStyle?.backgroundColor} // Changed from element to selectedElement
+                            onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value, 'outerStyle')}
+                        />
                     }
 
+                    {element?.outerStyle?.textAlign &&
+                        <ToggleGroupField label={'Text Align'} value={element?.outerStyle?.textAlign} onHandleStyleChange={(value: any) => onHandleStyleChange('textAlign', value, 'outerStyle')} options={textAlignOptions} />
+                    }
+
+
+
                     {element?.style?.fontSize &&
-                        <InputStylefield label={'Font Size'} value={element?.style?.fontSize} onHandleStyleChange={(value: any) => onHandleStyleChange('fontSize', value)} />
+                        <InputStylefield label={'Font Size'} value={element?.style?.fontSize} onHandleStyleChange={(value: any) => onHandleStyleChange('fontSize', value, 'style')} />
                     }
 
                     {element?.style?.padding &&
-                        <InputStylefield label={'Padding'} value={element?.style?.padding} onHandleStyleChange={(value: any) => onHandleStyleChange('padding', value)} />
+                        <InputStylefield label={'Padding'} value={element?.style?.padding} onHandleStyleChange={(value: any) => onHandleStyleChange('padding', value, 'style')} />
                     }
 
 
                     {element?.style?.borderRadius &&
-                        <SliderField label={'Border Radius'} type='px' value={element?.style?.borderRadius} onHandleStyleChange={(value: any) => onHandleStyleChange('borderRadius', value)} />
+                        <SliderField label={'Border Radius'} type='px' value={element?.style?.borderRadius} onHandleStyleChange={(value: any) => onHandleStyleChange('borderRadius', value, 'style')} />
                     }
 
                     {element?.style?.width &&
-                        <SliderField label={'Width'} type='%' value={element?.style?.width} onHandleStyleChange={(value: any) => onHandleStyleChange('width', value)} />
+                        <SliderField label={'Width'} type='%' value={element?.style?.width} onHandleStyleChange={(value: any) => onHandleStyleChange('width', value, 'style')} />
                     }
 
 

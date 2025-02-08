@@ -1,8 +1,8 @@
 import React from 'react'
 
-function TextComponent({style, textarea}:any) {
+function TextComponent({style, textarea, outerStyle}:any) {
   return (
-    <div className='w-full'>
+    <div style={outerStyle}>
       <span style={style}>{textarea}</span>
       {/* {textarea} */}
     </div>

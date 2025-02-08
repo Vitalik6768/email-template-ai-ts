@@ -1,11 +1,10 @@
 
 import React from 'react'
 
-function LogoComponent({style, image, url, imageUrl}:any) {
+function LogoComponent({style, image, url, imageUrl, outerStyle}:any) {
   return (
-    <div>
+    <div className='bg-red-500'>
         <img src={imageUrl} alt={image} style={style} />
-      
     </div>
   )
 }

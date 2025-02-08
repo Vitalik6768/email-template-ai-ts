@@ -26,7 +26,7 @@ export const ElementList = [
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%'
+            width: '50%'
         }
     },
 
@@ -59,7 +59,7 @@ export const ElementList = [
         },
         outerStyle: {
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'left',
             alignItems: 'center',
             width: '100%',
             margin: '20px 0',
@@ -71,17 +71,16 @@ export const ElementList = [
         label: 'Text',
         textarea: 'Sample Text',
         style: {
-            backgroundColor: '#7a3e3e',
             color: '#000000',
             padding: '10px',
-            textAlign: 'left',
             fontSize: '22px',
             fontWeight: 'normal',
             textTransform: 'uppercase'//lowercase , capitilized
         },
         outerStyle: {
-            backgroundColor: '#7a3e3e',
-            width: '100%'
+            backgroundColor: '#eaa9a9',
+            width: '100%',
+            textAlign: 'center',
         }
     },
     {
