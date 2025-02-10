@@ -7,6 +7,11 @@ export default defineSchema({
     design: v.any(),
     email: v.string(),
   }),
+  messages: defineTable({
+    body: v.string(),
+    author: v.string(),
+    format: v.string(),
+  }),
 });
 
 

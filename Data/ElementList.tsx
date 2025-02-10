@@ -25,8 +25,9 @@ export const ElementList = [
         outerStyle: {
             display: 'flex',
             justifyContent: 'center',
+            backgroundColor: '#ffffff',
             alignItems: 'center',
-            width: '50%'
+            width: '100%'
         }
     },
 
@@ -75,7 +76,7 @@ export const ElementList = [
             padding: '10px',
             fontSize: '22px',
             fontWeight: 'normal',
-            textTransform: 'uppercase'//lowercase , capitilized
+          //lowercase , capitilized
         },
         outerStyle: {
             backgroundColor: '#eaa9a9',
@@ -83,6 +84,7 @@ export const ElementList = [
             textAlign: 'center',
         }
     },
+    
     {
         icon: Image,
         type: 'Image',
