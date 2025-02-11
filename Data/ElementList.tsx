@@ -1,4 +1,9 @@
-import { Columns2, Facebook, Frame, Framer, Image, Link2, PanelTop, Projector, RectangleEllipsis, SquareSplitVertical, Text, TextSelectionIcon, Twitter } from "lucide-react";
+import {
+    Columns2, Facebook, Frame, Framer, Heading1, Image, Link2, PanelTop,
+    Projector, RectangleEllipsis, SquareSplitVertical,
+    Text, TextSelectionIcon,
+    Twitter
+} from "lucide-react";
 
 export const ElementList = [
 
@@ -76,7 +81,7 @@ export const ElementList = [
             padding: '10px',
             fontSize: '22px',
             fontWeight: 'normal',
-          //lowercase , capitilized
+            //lowercase , capitilized
         },
         outerStyle: {
             backgroundColor: '#eaa9a9',
@@ -84,7 +89,32 @@ export const ElementList = [
             textAlign: 'center',
         }
     },
-    
+
+    {
+        icon: Heading1,
+        type: 'Header1',
+        label: 'H1',
+        textarea: 'Sample Text',
+        style: {
+            color: '#000000',
+            padding: '10px',
+            fontSize: '40px',
+            fontWeight: 'normal',
+            //lowercase , capitilized
+        },
+        outerStyle: {
+            backgroundColor: '#eaa9a9',
+            width: '100%',
+            textAlign: 'center',
+        }
+    },
+
+
+
+
+
+
+
     {
         icon: Image,
         type: 'Image',
@@ -129,7 +159,7 @@ export const ElementList = [
             width: '100%'
         }
     },
-    
+
     {
         icon: SquareSplitVertical,
         type: 'Divider',
@@ -157,7 +187,7 @@ export const ElementList = [
     },
 
 
-   
+
 ]
 
 

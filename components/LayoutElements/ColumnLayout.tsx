@@ -9,6 +9,7 @@ import ImageComponent from '../custom/Element/ImageComponent'
 import LogoComponent from '../custom/Element/LogoComponent'
 import DividerComponent from '../custom/Element/DividerComponent'
 import { Trash2Icon } from 'lucide-react'
+import HeaderComponent from '../custom/Element/HeaderComponent'
 
 
 function ColumnLayout({ layout }: { layout: any }) {
@@ -31,7 +32,10 @@ function ColumnLayout({ layout }: { layout: any }) {
             return <LogoComponent {...element} />
         } else if (element?.type === 'Divider') {
             return <DividerComponent {...element} />
+        } else if (element?.type === 'Header1') {
+            return <HeaderComponent {...element} />
         }
+        
 
         console.log(emailTemplate)
         // return <div>{element?.type}</div>|| null;

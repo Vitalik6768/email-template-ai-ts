@@ -4,6 +4,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
+import { Separator } from '@/components/ui/separator';
 
 
 interface ToggleGroupFieldProps {
@@ -19,34 +20,34 @@ interface ToggleGroupFieldProps {
 
 
 
+
 function ToggleGroupField({ label, value, onHandleStyleChange, options }: ToggleGroupFieldProps) {
   return (
-    <div>
-      <label>{label}</label>
-      <ToggleGroup type="single"
-      defaultValue={value}
-      onValueChange={(value) => onHandleStyleChange(value)}
-
-      
-      >
-        {options.map((option, index) => (
-          <ToggleGroupItem 
-            key={index} 
-            value={option.value} 
-            aria-label={option.value}
-          >
-            {option.icon}
-          </ToggleGroupItem>
-        ))}
-
-      </ToggleGroup>
+    <>
+      <Separator className="my-4" />
 
 
+      <div className="flex items-center space-x-2" >
+        <label className="text-sm font-medium text-muted-foreground">{label}</label>
+        <ToggleGroup type="single"
+          defaultValue={value}
+          onValueChange={(value) => onHandleStyleChange(value)}
 
+        >
+          {options.map((option, index) => (
+            <ToggleGroupItem
+              key={index}
+              value={option.value}
+              aria-label={option.value}
+            >
+              {option.icon}
+            </ToggleGroupItem>
+          ))}
 
+        </ToggleGroup>
 
-
-    </div>
+      </div>
+    </>
   )
 }
 

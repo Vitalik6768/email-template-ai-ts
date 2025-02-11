@@ -149,7 +149,7 @@ function Settings() {
 
                     {element?.outerStyle?.backgroundColor &&
                         < ColorPickerField
-                            label={'Background Color'}
+                            label={'Background'}
                             value={element?.outerStyle?.backgroundColor} // Changed from element to selectedElement
                             onHandleStyleChange={(value: any) => onHandleStyleChange('backgroundColor', value, 'outerStyle')}
                         />

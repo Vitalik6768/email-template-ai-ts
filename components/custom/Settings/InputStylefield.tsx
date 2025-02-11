@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input'
+import { Separator } from '@/components/ui/separator'
 import React from 'react'
 
 function InputStylefield({ label, value, onHandleStyleChange }: any) {
@@ -7,16 +8,18 @@ function InputStylefield({ label, value, onHandleStyleChange }: any) {
         return Number(value.toString().replace('px', ''))
     }
     return (
-        <div>
-            <label>{label}</label>
-            <div className='flex'>
-
-                <br />
-                <Input type='text' value={formatedValue(value)} onChange={(event) => onHandleStyleChange(event.target.value + 'px')} />
-                <h2 className=' p-1 bg-gray-100 rounded-r-lg -ml-2'>px</h2>
+        <>
+            <Separator className="my-4" />
+            <div className="flex items-center space-x-2">
+                <label className="text-sm font-medium text-muted-foreground">{label}</label>
+                <div className="flex items-center">
+                    <Input className="w-14 h-7 rounded-r-none text-sm px-2" type='text' value={formatedValue(value)} onChange={(event) => onHandleStyleChange(event.target.value + 'px')} />
+                    <span className="inline-flex items-center px-2 h-7 text-xs font-medium text-muted-foreground bg-muted border border-l-0 border-input rounded-r-md mx-1">
+                        px
+                    </span>
+                </div>
             </div>
-
-        </div>
+        </>
     )
 }
 

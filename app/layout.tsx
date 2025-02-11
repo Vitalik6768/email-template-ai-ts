@@ -8,6 +8,7 @@ import Provider from "./provider";
 import { ClerkProvider, useAuth } from "@clerk/nextjs"
 import { Authenticated, AuthLoading, ConvexProvider, ConvexReactClient } from "convex/react"
 import { ConvexProviderWithClerk } from "convex/react-clerk"
+import { Toaster } from "sonner";
 
 
 interface ConvexClientProviderProps {
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Toaster />
         <ClerkProvider>
           <ConvexProviderWithClerk
             useAuth={useAuth}
@@ -54,6 +56,7 @@ export default function RootLayout({
             </Provider>
           </ConvexProviderWithClerk>
         </ClerkProvider>
+        
       </body>
     </html>
   );
