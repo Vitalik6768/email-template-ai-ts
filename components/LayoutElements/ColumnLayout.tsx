@@ -108,7 +108,6 @@ function ColumnLayout({ layout }: { layout: any }) {
 
 
 
-
     return (
         <div className='relative'>
             <table
@@ -116,7 +115,7 @@ function ColumnLayout({ layout }: { layout: any }) {
                     width: '100%',
                     borderCollapse: 'collapse'
                 }}
-                className={`${(selectedElement?.layout?.id == layout?.id && 'border border-dashed-4 border-blue-500')} `}
+                className={`${(selectedElement?.layout?.id === layout?.id && 'border border-dashed-4 border-blue-500')} `}
             >
                 <tbody>
                     <tr>
@@ -132,7 +131,10 @@ function ColumnLayout({ layout }: { layout: any }) {
                                    
                                 onDragOver={(event) => onDragOverHandle(event, index)}
                                 onDrop={onDropHandle}
-                                onClick={() => setSelectedElement({ layout: layout, index: index })}
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    setSelectedElement({ layout: layout, index: index });
+                                }}
                             >
                                 {getElementComponent(layout?.[index]) ?? index + 1}
                             </td>
@@ -142,13 +144,12 @@ function ColumnLayout({ layout }: { layout: any }) {
             </table>
 
             <div className='absolute -right-14 bg-gray-100'>
-                {selectedElement?.layout?.id == layout?.id &&
+                {selectedElement?.layout?.id === layout?.id &&
                     <Trash2Icon onClick={() => DeleteLayout(layout?.id)} className='text-gray-500 cursor-pointer hover:text-red-500' />
                 }
             </div>
         </div>
     )
-    
 }
 
 export default ColumnLayout

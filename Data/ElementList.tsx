@@ -81,6 +81,7 @@ export const ElementList = [
             padding: '10px',
             fontSize: '22px',
             fontWeight: 'normal',
+            fontFamily: 'Arial, sans-serif',
             //lowercase , capitilized
         },
         outerStyle: {

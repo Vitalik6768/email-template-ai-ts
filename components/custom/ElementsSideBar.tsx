@@ -10,31 +10,32 @@ import {
     TabsContent,
     TabsList,
     TabsTrigger,
-  } from "@/components/ui/tabs"
+} from "@/components/ui/tabs"
+
 
 
 
 function ElementsSideBar() {
-    const {dragElementLayout, setDragElementLayout} = useDragElementLayout()
+    const { dragElementLayout, setDragElementLayout } = useDragElementLayout()
 
 
-    
 
-    const onDragStart = (layout:any) => {
+
+    const onDragStart = (layout: any) => {
         console.log(layout)
         setDragElementLayout({
-            dragLayout:{
+            dragLayout: {
                 ...layout,
-                id:Date.now(),
+                id: Date.now(),
 
 
             }
         })
     }
 
-    const onDragElementsStart = (element:any) => {
+    const onDragElementsStart = (element: any) => {
         setDragElementLayout({
-            dragElement:{
+            dragElement: {
                 ...element,
             }
         })
@@ -48,7 +49,6 @@ function ElementsSideBar() {
                     <TabsTrigger value="layout">Layout</TabsTrigger>
                     <TabsTrigger value="elements">Elements</TabsTrigger>
                 </TabsList>
-                
                 <TabsContent value="layout">
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                         {Layout.map((layout, index) => (
@@ -71,7 +71,7 @@ function ElementsSideBar() {
                             </div>
                         ))}
                     </div>
-                </TabsContent>
+                    </TabsContent>
             </Tabs>
         </div>
     )
