@@ -111,11 +111,6 @@ export const ElementList = [
     },
 
 
-
-
-
-
-
     {
         icon: Image,
         type: 'Image',
