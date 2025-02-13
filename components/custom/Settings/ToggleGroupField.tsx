@@ -27,7 +27,7 @@ function ToggleGroupField({ label, value, onHandleStyleChange, options }: Toggle
       <Separator className="my-4" />
 
 
-      <div className="flex items-center space-x-2" >
+      <div className="flex items-center space-x-2 justify-between" >
         <label className="text-sm font-medium text-muted-foreground">{label}</label>
         <ToggleGroup type="single"
           defaultValue={value}

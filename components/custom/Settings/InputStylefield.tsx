@@ -10,7 +10,7 @@ function InputStylefield({ label, value, onHandleStyleChange }: any) {
     return (
         <>
             <Separator className="my-4" />
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 justify-between">
                 <label className="text-sm font-medium text-muted-foreground">{label}</label>
                 <div className="flex items-center">
                     <Input className="w-14 h-7 rounded-r-none text-sm px-2" type='text' value={formatedValue(value)} onChange={(event) => onHandleStyleChange(event.target.value + 'px')} />

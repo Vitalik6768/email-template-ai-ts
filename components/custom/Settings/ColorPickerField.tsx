@@ -11,7 +11,7 @@ function ColorPickerField({ label, value, onHandleStyleChange }: any) {
     <>
     <Separator className="my-4" />
 
-      <div className='flex items-center space-x-2'>
+      <div className='flex items-center justify-between space-x-2'>
         <label className='text-sm font-medium text-muted-foreground'>{label}</label>
         <div className='flex items-center'>
           <input type='color' value={value} onChange={(event) => onHandleStyleChange(event.target.value)} />

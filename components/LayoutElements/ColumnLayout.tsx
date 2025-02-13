@@ -143,11 +143,15 @@ function ColumnLayout({ layout }: { layout: any }) {
                 </tbody>
             </table>
 
-            <div className='absolute -right-14 bg-gray-100'>
+            <div className='absolute -right-14 top-2 bg-gray-100'>
                 {selectedElement?.layout?.id === layout?.id &&
                     <Trash2Icon onClick={() => DeleteLayout(layout?.id)} className='text-gray-500 cursor-pointer hover:text-red-500' />
                 }
             </div>
+
+
+
+
         </div>
     )
 }
