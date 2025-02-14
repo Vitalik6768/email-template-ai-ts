@@ -75,3 +75,22 @@ export const updateEmailTemplate = mutation({
     });
   },
 });
+
+export const insertUser = mutation({
+  args: {
+    email: v.string(),
+    name: v.string(),
+    picture: v.string(),
+    credits: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const result = await ctx.db.insert("users", {
+      email: args.email,
+      name: args.name,
+      picture: args.picture,
+      credits: args.credits,
+    });
+    return result;
+  },
+});
+
