@@ -8,9 +8,8 @@ export const POST = async (req: NextRequest) => {
     try {
         // Parse the incoming JSON body
         const eventData = await req.json();
-
         const userData = eventData.data;
-        const emailVar = userData.email_addresses?.[0]?.email_address; 
+        const emailVar = userData.email_addresses?.[0]?.email_address;
 
         if (!userData.id || !userData.first_name || !emailVar) {
             return new NextResponse(JSON.stringify({
@@ -21,48 +20,11 @@ export const POST = async (req: NextRequest) => {
             });
         }
 
-
-        
-    
-
-        console.log(eventData)
-
-        
-        // const userData = eventData.data;
-        const email = eventData.email
-        const name = eventData.name || '';
-        const picture = eventData.picture || '';
-        const credits = eventData.credits || '';
-        if(!email || !name || !picture || !credits){
-            return new NextResponse(JSON.stringify({
-                message: "Required user data is missing",
-            }), {
-                status: 400,
-            });
-        }
-
-
-        // const userData = eventData.data;
-        // const email = userData.email_addresses?.[0]?.email_address;
-        // const firstName = userData.first_name || '';
-        // const lastName = userData.last_name || '';
-        // const imageUrl = userData.image_url || '';
-
-        // Ensure necessary fields are present
-        // if (!eventData || !email) {
-        //     return new NextResponse(JSON.stringify({
-        //         message: "Required user data is missing",
-        //     }), {
-        //         status: 400,
-        //         headers: { 'Content-Type': 'application/json' },
-        //     });
-        // }
-
-        // Insert the new user using Convex mutation
+        // Remove redundant code and use the already parsed userData
         const result = await convex.mutation(api.emailTemplate.insertUser, {
             email: emailVar,
-            name: `${userData.first_name} ${userData.last_name}`,
-            picture: 'picture',
+            name: `${userData.first_name} ${userData.last_name || ''}`,
+            picture: userData.image_url || 'picture',
             credits: 10,
         });
 
