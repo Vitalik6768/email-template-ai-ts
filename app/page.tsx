@@ -2,6 +2,12 @@ import Image from "next/image";
 import Header from "@/components/custom/Header";
 import Hero from "@/components/custom/Hero";
 import Link from "next/link";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Project Gallery | Your Site Name',
+  description: 'Browse through our collection of interactive projects and templates.',
+};
 
 export default function Home() {
   // Sample projects - you can replace with your actual data
@@ -23,10 +29,29 @@ export default function Home() {
     <div>
       <Header />
       <Hero />
+     
+
+      <div className="container mx-auto px-4 py-8">
+        <div className="rounded-lg overflow-hidden shadow-2xl border max-w-4xl mx-auto">
+          <Image
+            src="/themeImg.png"
+            alt="Tabular email builder interface"
+            width={1200}
+            height={800}
+            className="w-full"
+          />
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Free Email Templates</h2>
+        <p className="text-gray-600 mb-8">Choose from our collection of professionally designed email templates</p>
+      </div>
+
       <div className="container mx-auto px-4 py-16 flex justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[60%]">
           {projects.map((project) => (
-            <Link 
+            <Link
               href={`/editor/${project.id}`}
               key={project.id}
               className="block group bg-white hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden border border-gray-100 hover:border-gray-200 hover:-translate-y-1"
@@ -48,6 +73,8 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+
     </div>
   );
 }
