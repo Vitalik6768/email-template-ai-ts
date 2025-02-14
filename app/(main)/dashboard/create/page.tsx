@@ -1,7 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import React from 'react'
 import { Wand2, FileText } from 'lucide-react'
-import AinputBox from '@/components/custom/AinputBox'
+import AinputBox from '../_components/AinputBox'
+import CreateNewTemplate from '../_components/CreateNewTemplate'
+// import AinputBox from '@/components/custom/AinputBox'
 
 function Page() {
     return (
@@ -30,7 +32,10 @@ function Page() {
                         <AinputBox />
 
                     </TabsContent>
-                    <TabsContent value="scratch">Make your email look professional</TabsContent>
+                    <TabsContent value="scratch">
+                        <CreateNewTemplate />
+
+                    </TabsContent>
 
                 </Tabs>
             </div>

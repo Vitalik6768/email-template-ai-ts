@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useState } from 'react'
-import { Textarea } from '../ui/textarea'
-import { Button } from '../ui/button'
+// import { Textarea } from '../ui/textarea'
+// import { Button } from '../ui/button'
 import Prompt from '@/Data/Prompt'
 import axios from 'axios'
 import { useMutation } from 'convex/react'
@@ -10,6 +10,8 @@ import { api } from '@/convex/_generated/api'
 import { Loader2 } from "lucide-react"
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/navigation'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
 
 function AinputBox() {
 
