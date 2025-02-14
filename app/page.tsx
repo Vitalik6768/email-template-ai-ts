@@ -33,7 +33,7 @@ export default function Home() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="rounded-lg overflow-hidden shadow-2xl border max-w-4xl mx-auto">
-          <Image
+          <img
             src="https://insightful-elk-623.convex.cloud/api/storage/c5fab876-b7cf-4701-8355-1ba651499c46"
             alt="interface"
             width={1200}
