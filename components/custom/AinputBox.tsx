@@ -25,6 +25,7 @@ function AinputBox() {
         const uniqueId = uuidv4()
         
 
+        
         try {
             const { data } = await axios.post('/api/ai-email-generate', {
                 prompt: prompt,

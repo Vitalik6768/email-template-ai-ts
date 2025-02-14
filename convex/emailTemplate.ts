@@ -1,27 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
-// export const updateEmailTemplate = mutation({
-//     args: {
-//         tid: v.string(),
-//         design: v.any(),
-//     },
-//     handler: async (ctx, args) => {
-//         const template = await ctx.db
-//             .query("emailsTemplates")
-//             .filter((q) => q.eq(q.field("tid"), args.tid))
-//             .first();
 
-//         if (!template) {
-//             throw new Error("Template not found");
-//         }
-
-//         const result = await ctx.db.patch(template._id, {
-//             design: args.design
-//         });
-//         return result;
-//     }
-// });
 
 export const saveEmailTemplate = mutation({
   args: {
@@ -76,6 +56,24 @@ export const updateEmailTemplate = mutation({
   },
 });
 
+export const deleteEmailTemplate = mutation({
+  args: {
+    tid: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const template = await ctx.db
+      .query("emailsTemplates")
+      .filter((q) => q.eq(q.field("tid"), args.tid))
+      .first();
+
+    if (!template) {
+      throw new Error("Template not found");
+    }
+
+    await ctx.db.delete(template._id);
+    return true;
+  },
+});
 
 export const insertUser = mutation({
   args: {
@@ -107,3 +105,12 @@ export const insertUser = mutation({
   },
 });
 
+export const getUserEmailTemplate = query({
+  args: {
+    email: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const result = await ctx.db.query("emailsTemplates").filter((q) => q.eq(q.field("email"), args.email)).collect();
+    return result;
+  },
+});
