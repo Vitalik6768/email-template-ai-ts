@@ -76,6 +76,7 @@ export const updateEmailTemplate = mutation({
   },
 });
 
+
 export const insertUser = mutation({
   args: {
     email: v.string(),
@@ -84,6 +85,18 @@ export const insertUser = mutation({
     credits: v.number(),
   },
   handler: async (ctx, args) => {
+    // Check if user already exists
+    const existingUser = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("email"), args.email))
+      .first();
+
+    // If user exists, return the existing user
+    if (existingUser) {
+      return existingUser;
+    }
+
+    // If user doesn't exist, create new user
     const result = await ctx.db.insert("users", {
       email: args.email,
       name: args.name,
