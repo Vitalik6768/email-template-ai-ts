@@ -27,6 +27,13 @@ export const POST = async (req: NextRequest) => {
         const name = eventData.name || '';
         const picture = eventData.picture || '';
         const credits = eventData.credits || '';
+        if(!email || !name || !picture || !credits){
+            return new NextResponse(JSON.stringify({
+                message: "Required user data is missing",
+            }), {
+                status: 400,
+            });
+        }
 
 
         // const userData = eventData.data;
