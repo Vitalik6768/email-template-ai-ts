@@ -8,16 +8,22 @@ export const POST = async (req: NextRequest) => {
     try {
         // Parse the incoming JSON body
         const eventData = await req.json();
+
+        const userData = eventData.data;
+        const emailVar = userData.email_addresses?.[0]?.email_address; 
+
+        if (!userData.id || !userData.first_name || !emailVar) {
+            return new NextResponse(JSON.stringify({
+                message: "Required user data is missing",
+            }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' },
+            });
+        }
+
+
         
-        // Only process user.created events
-        // if (eventData.type !== 'user.created') {
-        //     return new NextResponse(JSON.stringify({
-        //         message: "Event type not handled",
-        //     }), {
-        //         status: 200,
-        //         headers: { 'Content-Type': 'application/json' },
-        //     });
-        // }
+    
 
         console.log(eventData)
 
@@ -54,9 +60,9 @@ export const POST = async (req: NextRequest) => {
 
         // Insert the new user using Convex mutation
         const result = await convex.mutation(api.emailTemplate.insertUser, {
-            email: email,
-            name: name,
-            picture: picture,
+            email: emailVar,
+            name: `${userData.first_name} ${userData.last_name}`,
+            picture: 'picture',
             credits: 10,
         });
 
