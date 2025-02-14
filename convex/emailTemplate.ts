@@ -93,7 +93,7 @@ export const insertUser = mutation({
 
     // If user exists, return the existing user
     if (existingUser) {
-      return existingUser;
+      return false;
     }
 
     // If user doesn't exist, create new user

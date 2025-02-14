@@ -46,16 +46,28 @@ export const POST = async (req: NextRequest) => {
         // }
 
         // Insert the new user using Convex mutation
-        const insertedUser = await convex.mutation(api.emailTemplate.insertUser, {
+        const result = await convex.mutation(api.emailTemplate.insertUser, {
             email: email,
             name: name,
             picture: picture,
-            credits: 10, // Starting credits for new users
+            credits: 10,
         });
+
+        // Handle case when user already exists
+        if (result === false) {
+            return new NextResponse(JSON.stringify({
+                message: "User already exists",
+                success: false
+            }), {
+                status: 409, // Conflict status code
+                headers: { 'Content-Type': 'application/json' },
+            });
+        }
 
         return new NextResponse(JSON.stringify({
             message: "User data inserted successfully",
-            data: insertedUser
+            data: result,
+            success: true
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
