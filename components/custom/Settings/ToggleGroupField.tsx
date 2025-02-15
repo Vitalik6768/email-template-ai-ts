@@ -1,4 +1,5 @@
-import React from 'react'
+
+import React, { useState } from 'react'
 import { Bold, Italic, Underline } from "lucide-react"
 import {
   ToggleGroup,
@@ -22,6 +23,9 @@ interface ToggleGroupFieldProps {
 
 
 function ToggleGroupField({ label, value, onHandleStyleChange, options }: ToggleGroupFieldProps) {
+
+
+  console.log('taggle group value', value)
   return (
     <>
       <Separator className="my-4" />
@@ -31,7 +35,13 @@ function ToggleGroupField({ label, value, onHandleStyleChange, options }: Toggle
         <label className="text-sm font-medium text-muted-foreground">{label}</label>
         <ToggleGroup type="single"
           defaultValue={value}
-          onValueChange={(value) => onHandleStyleChange(value)}
+          onValueChange={(value) => {
+            if (value === '') {
+            } else {
+              onHandleStyleChange(value)
+            }
+
+          }}
 
         >
           {options.map((option, index) => (

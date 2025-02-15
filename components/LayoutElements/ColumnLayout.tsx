@@ -136,7 +136,7 @@ function ColumnLayout({ layout }: { layout: any }) {
                                     setSelectedElement({ layout: layout, index: index });
                                 }}
                             >
-                                {getElementComponent(layout?.[index]) ?? index + 1}
+                                {getElementComponent(layout?.[index]) ?? <p className='text-center p-10 text-muted-foreground'>Add Element</p>}
                             </td>
                         ))}
                     </tr>

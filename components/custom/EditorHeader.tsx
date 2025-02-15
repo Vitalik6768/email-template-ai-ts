@@ -5,12 +5,14 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Code, Monitor, Smartphone } from 'lucide-react'
 import { useEmailTemplate, useScreenSize } from '@/app/provider'
-import { UserButton } from '@clerk/nextjs'
+import { UserButton, useUser } from '@clerk/nextjs'
 import { updateEmailTemplate } from '@/convex/emailTemplate'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { useParams } from 'next/navigation'
 import { toast } from "sonner";
+import { useRouter } from 'next/navigation'
+
 
 interface EditorHeaderProps {
     viewHtmlCode: (value: boolean) => void
@@ -22,16 +24,26 @@ function EditorHeader({ viewHtmlCode }: EditorHeaderProps) {
     const { templateId } = useParams();
     const { emailTemplate, setEmailTemplate } = useEmailTemplate();
     const [isSaving, setIsSaving] = React.useState(false);
+    const { user } = useUser();
+    const router = useRouter()
+
 
     const onSaveTemplate = async () => {
         try {
             setIsSaving(true);
             const cleanTemplate = JSON.parse(JSON.stringify(emailTemplate));
-            await updateEmailTemplate({
+            const res = await updateEmailTemplate({
                 tid: templateId as string,
-                design: cleanTemplate
+                design: cleanTemplate,
+                email: user?.primaryEmailAddress?.emailAddress || ''
             });
-
+            
+            if (typeof res !== 'object') {
+                router.push('/editor/' + res);
+                
+            }
+            
+            console.log(res);
             toast.success("Template saved successfully");
         } catch (error) {
             toast.error("Failed to save template");

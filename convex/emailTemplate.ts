@@ -1,6 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { v4 as uuidv4 } from 'uuid'
 
+const uniqueId = uuidv4()
 
 
 export const saveEmailTemplate = mutation({
@@ -14,6 +16,7 @@ export const saveEmailTemplate = mutation({
       tid: args.tid,
       design: args.design,
       email: args.email,
+      public: false,
     });
     return result;
   },
@@ -39,6 +42,7 @@ export const getEmailTemplate = query({
 
 export const updateEmailTemplate = mutation({
   args: {
+    email: v.string(),
     tid: v.string(),
     design: v.any(),
   },
@@ -48,11 +52,24 @@ export const updateEmailTemplate = mutation({
       .filter((q) => q.eq(q.field("tid"), args.tid))
       .collect();
 
-    const docId = result[0]._id;
+    const template = result[0];
+    
+    // If template is public, create a new private template
+    if (template.email !== args.email && template.public) {
+      const newTemplate = await ctx.db.insert("emailsTemplates", {
+        tid: uniqueId,
+        design: args.design,
+        email: args.email,
+        public: false,
+      });
+      return uniqueId;
+    }
 
-    await ctx.db.patch(docId, {
+    // Otherwise update existing template
+    await ctx.db.patch(template._id, {
       design: args.design,
     });
+    return template;
   },
 });
 

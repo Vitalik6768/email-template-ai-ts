@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Slider } from "@/components/ui/slider"
 
@@ -19,12 +18,13 @@ function SliderField({label, value, onHandleStyleChange, type }:SliderFieldProps
 
   return (
     <div className='mt-3'>
-        <label>{label} ({value})</label>
-        <Slider defaultValue={[formatedValue(value)]} max={100} step={1}
+        <label className='text-sm font-medium text-muted-foreground'>{label} ({value})</label>
+        <Slider className='cursor-pointer' defaultValue={[formatedValue(value)]} max={100} step={1}
         
         onValueChange={(value) => onHandleStyleChange(`${value}${type}`)}
          />
       
+
     </div>
   )
 }

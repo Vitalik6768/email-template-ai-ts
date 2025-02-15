@@ -1,6 +1,8 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
+
+
 export default defineSchema({
   users: defineTable({
     email: v.string(),
@@ -12,6 +14,7 @@ export default defineSchema({
     tid: v.string(),
     design: v.any(),
     email: v.string(),
+    public: v.optional(v.boolean()),
   }),
   messages: defineTable({
     body: v.string(),
