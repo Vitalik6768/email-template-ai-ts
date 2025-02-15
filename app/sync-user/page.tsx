@@ -31,6 +31,8 @@ const SyncUserPage = async() => {
 
         console.error('Error inserting user:', error);
         return <p>User insertion failed</p>
+
+        
     }
     
     // Redirect to dashboard regardless of the result
