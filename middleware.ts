@@ -25,12 +25,6 @@ export default clerkMiddleware(async (auth, request) => {
 })
 
 
-// export default clerkMiddleware((auth, req) => {
-//   if (isProtectedRoute(req)){
-//    await auth().protect()
-//   } 
-// })
-
 
 
 
