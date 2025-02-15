@@ -1,11 +1,15 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
 const isPublicRoute = createRouteMatcher([
-  '/sign-in(.*)', 
-  '/sign-up(.*)',
-  '/api/(.*)',  // Add API routes to public routes
-  '/api/webhooks/(.*)',  // Add this to be extra specific
-  '/api/clerk-webhook/(.*)'  // Add this to be even more specific
+
+
+  '/dashboard(.*)','/editor(.*)','/','/editor(.*)', // Protect all routes  // You can list other routes you want to protect here
+
+  // '/sign-in(.*)', 
+  // '/sign-up(.*)',
+  // '/api/(.*)',  // Add API routes to public routes
+  // '/api/webhooks/(.*)',  // Add this to be extra specific
+  // '/api/clerk-webhook/(.*)'  // Add this to be even more specific
 ])
 
 export default clerkMiddleware(async (auth, request) => {
